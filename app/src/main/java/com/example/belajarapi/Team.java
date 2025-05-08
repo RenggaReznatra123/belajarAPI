@@ -1,19 +1,22 @@
 package com.example.belajarapi;
 
 public class Team {
-    private String strTeam;
-    private String strStadium;
-    private String strTeamBadge;
+    private String strTeam;        // nama tim
+    private String strStadium;     // nama stadion
+    private String strBadge;   // URL logo tim (gambar)
 
+    // Getter untuk nama tim
     public String getStrTeam() {
         return strTeam;
     }
 
+    // Getter untuk nama stadion
     public String getStrStadium() {
         return strStadium;
     }
 
-    public String getStrTeamBadge() {
-        return strTeamBadge;
+    // Getter untuk URL logo tim
+    public String getBadge() {
+        return strBadge;
     }
 }

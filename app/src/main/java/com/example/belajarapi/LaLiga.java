@@ -16,17 +16,17 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class LaLiga extends AppCompatActivity {
     RecyclerView recyclerView;
     ProgressBar pbLoading;
     TeamAdapter teamAdapter;
     List<Team> teamList = new ArrayList<>();
-    PremiereLeagueInterface api;
+    SpainLeagueInterface api;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main);  // pakai layout yang benar!
 
         pbLoading = findViewById(R.id.pbLoading);
         recyclerView = findViewById(R.id.rvTeam);
@@ -35,33 +35,33 @@ public class MainActivity extends AppCompatActivity {
         teamAdapter = new TeamAdapter(this, teamList);
         recyclerView.setAdapter(teamAdapter);
 
-        api = ApiClient.getClient().create(PremiereLeagueInterface.class);
+        api = ApiClient.getClient().create(SpainLeagueInterface.class);
         fetchTeams();
     }
 
     private void fetchTeams() {
-        pbLoading.setVisibility(View.VISIBLE);
-        recyclerView.setVisibility(View.GONE);
+        pbLoading.setVisibility(View.VISIBLE);    // tampilkan loading
+        recyclerView.setVisibility(View.GONE);    // sembunyikan list
 
-        Call<TeamResponse> call = api.getAllTeams("English Premier League");
+        Call<TeamResponse> call = api.getAllTeams();
         call.enqueue(new Callback<TeamResponse>() {
             @Override
             public void onResponse(Call<TeamResponse> call, Response<TeamResponse> response) {
-                pbLoading.setVisibility(View.GONE);
+                pbLoading.setVisibility(View.GONE);   // sembunyikan loading
                 if (response.isSuccessful() && response.body() != null) {
                     teamList.clear();
                     teamList.addAll(response.body().getTeams());
                     teamAdapter.notifyDataSetChanged();
-                    recyclerView.setVisibility(View.VISIBLE);
+                    recyclerView.setVisibility(View.VISIBLE);  // munculkan list
                 } else {
-                    Toast.makeText(MainActivity.this, "Gagal memuat data", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LaLiga.this, "Gagal memuat data", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<TeamResponse> call, Throwable t) {
-                pbLoading.setVisibility(View.GONE);
-                Toast.makeText(MainActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                pbLoading.setVisibility(View.GONE);  // sembunyikan loading
+                Toast.makeText(LaLiga.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
