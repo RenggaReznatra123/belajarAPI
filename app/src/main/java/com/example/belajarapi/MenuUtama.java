@@ -35,7 +35,7 @@ public class MenuUtama extends AppCompatActivity {
         btnLaliga.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MenuUtama.this, MainActivity.class);
+                Intent intent = new Intent(MenuUtama.this, LaLiga.class);
                 startActivity(intent);
             }
         });
@@ -43,7 +43,7 @@ public class MenuUtama extends AppCompatActivity {
         btnPremier.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MenuUtama.this, LaLiga.class);
+                Intent intent = new Intent(MenuUtama.this, MainActivity.class);
                 startActivity(intent);
             }
         });
